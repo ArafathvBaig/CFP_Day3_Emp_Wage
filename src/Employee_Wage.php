@@ -1,6 +1,10 @@
 <?php
 echo "Welcome to Employee Wage Computation Problem\n";
-// Class to Compute Employee Wage Problem
+/**
+ * Author -> Arafath Baig
+ * PHP Version -> 8.0.9
+ * Class to Compute Employee Wage Problem
+ */
 class Employee_Wage
 {
     public $WAGE_PER_HR = 20;
@@ -9,6 +13,7 @@ class Employee_Wage
     public $IS_FILL_TIME = 2;
     public $IS_PART_TIME = 1;
     public $IS_ABSENT = 0;
+    public $WORKING_DAYS_PER_MONTH = 20;
 
     /**
      * Function to Check Employee is Present or Absent
@@ -28,7 +33,7 @@ class Employee_Wage
                 echo "Full Time Employee\n";
                 return $this->FULL_TIME_WORKING_HRS;
                 break;
-                
+
             default:
                 echo "Employee is Absent\n";
                 return 0;
@@ -39,14 +44,33 @@ class Employee_Wage
     /**
      * Function to Calculate Daily Wage
      * Printing the daily wage to the output
+     * Calling attendance function to check employee attendance
+     * returns daily wage of the employee
      */
     function dailyWage()
     {
-        $obj = new Employee_Wage();
-        $hrs = $obj->attendance();
+        $hrs = $this->attendance();
         $dailyWage = $this->WAGE_PER_HR * $hrs;
-        echo "Daily Wage: " . $dailyWage;
+        echo "Working Hours:: " . $hrs . "\n";
+        echo "Daily Wage:: " . $dailyWage . "\n\n";
+        return $dailyWage;
+    }
+
+    /**
+     * Function to Calculate Monthly Wage
+     * Printing the Monthly wage to the output
+     * Calling daily wage function to get daily wage
+     */
+    function monthlyWage()
+    {
+        $monthlyWage = 0;
+        for ($i = 1; $i <= $this->WORKING_DAYS_PER_MONTH; $i++) {
+            echo "Day:: " . $i . "\n";
+            $dailyWage = $this->dailyWage();
+            $monthlyWage += $dailyWage;
+        }
+        echo "Monthly Wage:: " . $monthlyWage . "\n\n";
     }
 }
 $obj = new Employee_Wage();
-$obj->dailyWage();
+$obj->monthlyWage();
