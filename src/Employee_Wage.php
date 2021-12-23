@@ -79,7 +79,6 @@ class Employee_Wage
             $this->monthlyWage += $dailyWage;
             $this->totalWorkingHours += $this->workingHrs;
         }
-
         echo "Total Working Days:: " . $this->totalWorkingDays . "\n";
         echo "Total Working Hours:: " . $this->totalWorkingHours . "\n";
         echo "Monthly Wage:: " . $this->monthlyWage . "\n\n";
