@@ -14,6 +14,12 @@ class Employee_Wage
     public $IS_PART_TIME = 1;
     public $IS_ABSENT = 0;
     public $WORKING_DAYS_PER_MONTH = 20;
+    public $WORKING_HOURS_PER_MONTH = 100;
+
+    public $workingHrs = 0;
+    public $monthlyWage = 0;
+    public $totalWorkingDays = 0;
+    public $totalWorkingHours = 0;
 
     /**
      * Function to Check Employee is Present or Absent
@@ -49,9 +55,9 @@ class Employee_Wage
      */
     function dailyWage()
     {
-        $hrs = $this->attendance();
-        $dailyWage = $this->WAGE_PER_HR * $hrs;
-        echo "Working Hours:: " . $hrs . "\n";
+        $this->workingHrs = $this->attendance();
+        $dailyWage = $this->WAGE_PER_HR * $this->workingHrs;
+        echo "Working Hours:: " . $this->workingHrs . "\n";
         echo "Daily Wage:: " . $dailyWage . "\n\n";
         return $dailyWage;
     }
@@ -63,13 +69,20 @@ class Employee_Wage
      */
     function monthlyWage()
     {
-        $monthlyWage = 0;
-        for ($i = 1; $i <= $this->WORKING_DAYS_PER_MONTH; $i++) {
-            echo "Day:: " . $i . "\n";
+        while (
+            $this->totalWorkingHours <= $this->WORKING_HOURS_PER_MONTH &&
+            $this->totalWorkingDays < $this->WORKING_DAYS_PER_MONTH
+        ) {
+            $this->totalWorkingDays++;
+            echo "Day:: " . $this->totalWorkingDays . "\n";
             $dailyWage = $this->dailyWage();
-            $monthlyWage += $dailyWage;
+            $this->monthlyWage += $dailyWage;
+            $this->totalWorkingHours += $this->workingHrs;
         }
-        echo "Monthly Wage:: " . $monthlyWage . "\n\n";
+
+        echo "Total Working Days:: " . $this->totalWorkingDays . "\n";
+        echo "Total Working Hours:: " . $this->totalWorkingHours . "\n";
+        echo "Monthly Wage:: " . $this->monthlyWage . "\n\n";
     }
 }
 $obj = new Employee_Wage();
