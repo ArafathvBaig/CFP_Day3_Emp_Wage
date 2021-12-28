@@ -13,6 +13,10 @@ class Employee_Wage
     public $IS_PART_TIME = 1;
     public $IS_ABSENT = 0;
 
+    public $WORKING_DAYS_PER_MONTH;
+    public $WORKING_HOURS_PER_MONTH;
+    public $WAGE_PER_HR;
+
     public $workingHrs = 0;
     public $monthlyWage = 0;
     public $totalWorkingDays = 0;
@@ -95,14 +99,13 @@ class Employee_Wage
         $name = readline('Enter Name of Company: ');
         echo "Employee Wage Computation For\n";
         echo "***** " . $name . " *****\n";
-        $WORKING_DAYS_PER_MONTH = readline('Enter Max Working Days Per Month: ');
-        $WORKING_HOURS_PER_MONTH = readline('Enter Max Working Hours Per Month: ');
-        $WAGE_PER_HR = readline('Enter Employee Wage Per Hour: ');
-        $this->monthlyWage($WORKING_DAYS_PER_MONTH, $WORKING_HOURS_PER_MONTH, $WAGE_PER_HR);
+        $this->WORKING_DAYS_PER_MONTH = readline('Enter Max Working Days Per Month: ');
+        $this->WORKING_HOURS_PER_MONTH = readline('Enter Max Working Hours Per Month: ');
+        $this->WAGE_PER_HR = readline('Enter Employee Wage Per Hour: ');
+        $this->monthlyWage($this->WORKING_DAYS_PER_MONTH, $this->WORKING_HOURS_PER_MONTH, $this->WAGE_PER_HR);
     }
 }
 $company1 = new Employee_Wage();
 $company1->userInput();
 $company2 = new Employee_Wage();
 $company2->userInput();
-
