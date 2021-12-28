@@ -87,6 +87,7 @@ class Employee_Wage
         echo "Total Working Days:: " . $this->totalWorkingDays . "\n";
         echo "Total Working Hours:: " . $this->totalWorkingHours . "\n";
         echo "Monthly Wage:: " . $this->monthlyWage . "\n\n";
+        return $this->monthlyWage;
     }
 
     /**
@@ -96,16 +97,42 @@ class Employee_Wage
      */
     function userInput()
     {
-        $name = readline('Enter Name of Company: ');
-        echo "Employee Wage Computation For\n";
-        echo "***** " . $name . " *****\n";
         $this->WORKING_DAYS_PER_MONTH = readline('Enter Max Working Days Per Month: ');
         $this->WORKING_HOURS_PER_MONTH = readline('Enter Max Working Hours Per Month: ');
         $this->WAGE_PER_HR = readline('Enter Employee Wage Per Hour: ');
-        $this->monthlyWage($this->WORKING_DAYS_PER_MONTH, $this->WORKING_HOURS_PER_MONTH, $this->WAGE_PER_HR);
+        return $this->monthlyWage($this->WORKING_DAYS_PER_MONTH, $this->WORKING_HOURS_PER_MONTH, $this->WAGE_PER_HR);
     }
 }
-$company1 = new Employee_Wage();
-$company1->userInput();
-$company2 = new Employee_Wage();
-$company2->userInput();
+
+/**
+ * Class for multiple companies
+ * have numofCompanies functon to run that many times
+ * and storing company names and total wages into array
+ */
+class CompanyEmpWage
+{
+    /**
+     * Function for multiple companies and 
+     * storing name and total wage into arrays
+     * Passing number of companies as parameter
+     */
+    public function numOfCompanies($n)
+    {
+        $name = array();
+        $totalWage = array();
+        for ($i = 0; $i < $n; $i++) {
+            $name[$i] = readline('Enter Name of Company: ');
+            echo "Employee Wage Computation For\n";
+            echo "***** " . $name[$i] . " *****\n";
+            $employeeWage = new Employee_Wage();
+            $totalWage[$i] = $employeeWage->userInput();
+        }
+        for ($i = 0; $i < $n; $i++) {
+            echo "\nName of Company:: " . $name[$i];
+            echo "\nTotal Salary:: " . $totalWage[$i];
+        }
+    }
+}
+$n = readline("Number of Companies: ");
+$companyEmpWage = new CompanyEmpWage();
+$companyEmpWage->numOfCompanies($n);
