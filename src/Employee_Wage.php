@@ -5,7 +5,7 @@ echo "Welcome to Employee Wage Computation Problem\n";
  * PHP Version -> 8.0.9
  * Class to Compute Employee Wage Problem
  */
-class Employee_Wage
+class Employee_Wage implements computeEmpWage
 {
     public $FULL_TIME_WORKING_HRS = 8;
     public $PART_TIME_WORKING_HRS = 4;
@@ -133,6 +133,7 @@ class CompanyEmpWage
         }
     }
 }
+
 $n = readline("Number of Companies: ");
 $companyEmpWage = new CompanyEmpWage();
 $companyEmpWage->numOfCompanies($n);
