@@ -1,4 +1,6 @@
 <?php
+include 'CompanyEmpWage.php';
+include 'Employee_Wage_Interface.php';
 echo "Welcome to Employee Wage Computation Problem\n";
 /**
  * Author -> Arafath Baig
@@ -104,36 +106,5 @@ class Employee_Wage implements computeEmpWage
     }
 }
 
-/**
- * Class for multiple companies
- * have numofCompanies functon to run that many times
- * and storing company names and total wages into array
- */
-class CompanyEmpWage
-{
-    /**
-     * Function for multiple companies and 
-     * storing name and total wage into arrays
-     * Passing number of companies as parameter
-     */
-    public function numOfCompanies($n)
-    {
-        $name = array();
-        $totalWage = array();
-        for ($i = 0; $i < $n; $i++) {
-            $name[$i] = readline('Enter Name of Company: ');
-            echo "Employee Wage Computation For\n";
-            echo "***** " . $name[$i] . " *****\n";
-            $employeeWage = new Employee_Wage();
-            $totalWage[$i] = $employeeWage->userInput();
-        }
-        for ($i = 0; $i < $n; $i++) {
-            echo "\nName of Company:: " . $name[$i];
-            echo "\nTotal Salary:: " . $totalWage[$i];
-        }
-    }
-}
-
-$n = readline("Number of Companies: ");
 $companyEmpWage = new CompanyEmpWage();
-$companyEmpWage->numOfCompanies($n);
+$companyEmpWage->numOfCompanies();
